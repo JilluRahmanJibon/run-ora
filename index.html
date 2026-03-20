@@ -3,12 +3,13 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Run Ora — Run. Track. Achieve.</title>
+		<title>Runora — Run. Track. Achieve.</title>
 		<meta
 			name="description"
-			content="Run Ora is a virtual marathon app that lets runners join marathon. Track your distance, pace, and progress in real time." />
+			content="Runora is a virtual marathon app that lets runners join marathon. Track your distance, pace, and progress in real time." />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="icon" type="image/png" href="./assets/fav-logo.png" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter+Condensed:wght@700;800;900&family=Inter:wght@400;500;600&display=swap"
 			rel="stylesheet" />
@@ -176,7 +177,6 @@
 				align-items: center;
 				gap: 8px;
 			}
-		 
 
 			.hero-title {
 				font-family: "Inter", sans-serif;
@@ -204,44 +204,48 @@
 				display: flex;
 				gap: 14px;
 				flex-wrap: wrap;
+				align-items: center;
 			}
 
-			.store-btn {
-				display: flex;
+			/* Official store button styles */
+			.store-btn-official {
+				display: inline-flex;
 				align-items: center;
-				gap: 10px;
-				background: transparent;
-				border: 1.5px solid rgba(255, 255, 255, 0.18);
-				border-radius: 50px;
-				padding: 10px 20px;
 				text-decoration: none;
-				color: var(--white);
-				font-family: "Inter", sans-serif;
 				transition:
-					border-color 0.2s,
-					background 0.2s,
-					transform 0.2s;
+					transform 0.2s,
+					opacity 0.2s;
+				border-radius: 8px;
+				overflow: hidden;
 			}
-			.store-btn:hover {
-				border-color: var(--orange);
-				background: rgba(255, 158, 61, 0.06);
+			.store-btn-official:hover {
 				transform: translateY(-2px);
+				opacity: 0.9;
 			}
-			.store-btn .store-icon {
-				width: 30px;
-				height: 30px;
-				flex-shrink: 0;
-			}
-			.store-btn .store-label {
-				font-size: 9px;
-				color: rgba(255, 255, 255, 0.45);
+			.store-btn-official img {
+				height: 44px;
+				width: auto;
 				display: block;
-				letter-spacing: 0.4px;
-				font-weight: 400;
 			}
-			.store-btn .store-name {
-				font-size: 14px;
-				font-weight: 700;
+
+			.store-btn-svg {
+				display: inline-flex;
+				align-items: center;
+				text-decoration: none;
+				transition:
+					transform 0.2s,
+					opacity 0.2s;
+				border-radius: 10px;
+				overflow: hidden;
+				height: 44px;
+			}
+			.store-btn-svg:hover {
+				transform: translateY(-2px);
+				opacity: 0.88;
+			}
+			.store-btn-svg svg {
+				height: 44px;
+				width: auto;
 				display: block;
 			}
 
@@ -302,6 +306,15 @@
 			.footer-copy {
 				font-size: 12px;
 				color: rgba(255, 255, 255, 0.4);
+			}
+			.footer-copy a {
+				color: rgba(255, 255, 255, 0.55);
+				text-decoration: none;
+				font-weight: 500;
+				transition: color 0.2s;
+			}
+			.footer-copy a:hover {
+				color: var(--white);
 			}
 			.footer-links {
 				display: flex;
@@ -382,21 +395,42 @@
 	<body>
 		<!-- NAV -->
 		<nav>
-			<a href="#" class="logo" aria-label="Run Ora Home">
-				<img
-					src="./assets/logo.svg"
-					alt="Run Ora Logo"
-					width="91"
-					height="53" />
+			<a href="#" class="logo" aria-label="Runora Home">
+				<img src="./assets/logo.png" alt="Runora Logo" width="91" height="53" />
 			</a>
 
 			<ul class="nav-links">
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Challenges</a></li>
-				<li><a href="#">Get Run Ora</a></li>
+				<li>
+					<a
+						href="http://facebook.com/runoraapp"
+						target="_blank"
+						rel="noopener noreferrer"
+						>Home</a
+					>
+				</li>
+				<li>
+					<a
+						href="http://instagram.com/runora.pixora"
+						target="_blank"
+						rel="noopener noreferrer"
+						>Challenges</a
+					>
+				</li>
+				<li>
+					<a
+						href="http://youtube.com/@runoraapp"
+						target="_blank"
+						rel="noopener noreferrer"
+						>Get Runora</a
+					>
+				</li>
 			</ul>
 
-			<a href="#" class="nav-cta">
+			<a
+				href="http://youtube.com/@runoraapp"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="nav-cta">
 				View Challenges
 				<div class="arrow-box">
 					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -430,49 +464,113 @@
 				</p>
 
 				<div class="store-btns">
-					<a href="#" class="store-btn" aria-label="Download on Apple Store">
-						<!-- Apple Icon -->
+					<!-- Apple App Store Button -->
+					<a
+						href="https://apps.apple.com/app/runora/id6758382821"
+						class="store-btn-svg"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Download on the App Store">
 						<svg
-							class="store-icon"
-							viewBox="0 0 32 32"
+							viewBox="0 0 140 44"
 							fill="none"
-							xmlns="http://www.w3.org/2000/svg">
-							<circle cx="16" cy="16" r="16" fill="white" fill-opacity="0.08" />
+							xmlns="http://www.w3.org/2000/svg"
+							height="44">
+							<rect width="140" height="44" rx="8" fill="black" />
+							<rect
+								x="0.5"
+								y="0.5"
+								width="139"
+								height="43"
+								rx="7.5"
+								stroke="white"
+								stroke-opacity="0.3" />
+							<!-- Apple logo -->
 							<path
-								d="M20.5 17.2c0-2.5 2-3.7 2.1-3.8-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-3 .9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6.1-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.5.8 1.2 1.7 2.5 2.9 2.4 1.2-.1 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.2 2.8-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2-.8-2-3.7zm-1.9-6.8c.6-.8 1.1-1.9 1-3-.9.1-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.1-.5 2.7-1.3z"
+								d="M29.5 22.2c0-2.5 2-3.7 2.1-3.8-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-3 .9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6.1-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.5.8 1.2 1.7 2.5 2.9 2.4 1.2-.1 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.2 2.8-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2-.8-2-3.7zm-1.9-6.8c.6-.8 1.1-1.9 1-3-.9.1-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.1-.5 2.7-1.3z"
 								fill="white" />
+							<!-- Text -->
+							<text
+								x="40"
+								y="17"
+								font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif"
+								font-size="9"
+								fill="white"
+								opacity="0.75"
+								font-weight="400"
+								letter-spacing="0.2">
+								Download on the
+							</text>
+							<text
+								x="40"
+								y="31"
+								font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif"
+								font-size="16"
+								fill="white"
+								font-weight="600"
+								letter-spacing="-0.3">
+								App Store
+							</text>
 						</svg>
-						<div class="store-text">
-							<span class="store-label">Listed on</span>
-							<span class="store-name">Apple Store</span>
-						</div>
 					</a>
 
-					<a href="#" class="store-btn" aria-label="Download on Google Play">
-						<!-- Play Icon -->
+					<!-- Google Play Button -->
+					<a
+						href="https://play.google.com/store/apps/details?id=com.pixora.runora"
+						class="store-btn-svg"
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Get it on Google Play">
 						<svg
-							class="store-icon"
-							viewBox="0 0 32 32"
+							viewBox="0 0 155 44"
 							fill="none"
-							xmlns="http://www.w3.org/2000/svg">
-							<circle cx="16" cy="16" r="16" fill="white" fill-opacity="0.08" />
+							xmlns="http://www.w3.org/2000/svg"
+							height="44">
+							<rect width="155" height="44" rx="8" fill="black" />
+							<rect
+								x="0.5"
+								y="0.5"
+								width="154"
+								height="43"
+								rx="7.5"
+								stroke="white"
+								stroke-opacity="0.3" />
+							<!-- Play store colorful icon -->
 							<path
-								d="M8.5 8.3c-.3.3-.5.8-.5 1.4v12.7c0 .6.2 1.1.5 1.4l.1.1 7.1-7.1v-.2L8.5 8.3z"
+								d="M22 11.3c-.3.3-.5.8-.5 1.4v18.7c0 .6.2 1.1.5 1.4l.1.1 10.5-10.5v-.2L22 11.3z"
 								fill="#4FC3F7" />
 							<path
-								d="M18.1 18.8l-2.4-2.4v-.2l2.4-2.4.1.1 2.9 1.6c.8.5.8 1.2 0 1.7l-2.9 1.6-.1-.1-.1.1z"
+								d="M36.1 25.8l-3.5-3.5v-.2l3.5-3.5.1.1 4.2 2.4c1.2.7 1.2 1.8 0 2.5l-4.2 2.4-.1-.2z"
 								fill="#FFCA28" />
 							<path
-								d="M18.2 18.7L15.7 16 8.5 23.1c.3.3.7.3 1.2.1l8.5-4.5"
+								d="M36.2 25.7L32.6 22l-10.7 10.7c.4.4 1 .4 1.8.1l12.5-7.1"
 								fill="#F44336" />
 							<path
-								d="M18.2 13.3L9.7 8.8C9.2 8.6 8.8 8.6 8.5 8.9l7.2 7.1 2.5-2.7z"
+								d="M36.2 18.3L23.7 11.2c-.7-.4-1.4-.3-1.8.1L32.6 22l3.6-3.7z"
 								fill="#4CAF50" />
+							<!-- Text -->
+							<text
+								x="47"
+								y="17"
+								font-family="-apple-system, 'Helvetica Neue', sans-serif"
+								font-size="9"
+								fill="white"
+								opacity="0.75"
+								font-weight="400"
+								letter-spacing="0.2">
+								GET IT ON
+							</text>
+							<text
+								x="47"
+								y="31"
+								font-family="-apple-system, 'Helvetica Neue', sans-serif"
+								font-size="16"
+								fill="white"
+								font-weight="600"
+								letter-spacing="-0.3">
+								Google Play
+							</text>
 						</svg>
-						<div class="store-text">
-							<span class="store-label">Listed on</span>
-							<span class="store-name">Google Play</span>
-						</div>
 					</a>
 				</div>
 			</div>
@@ -481,7 +579,7 @@
 				<img
 					class="mockup-img"
 					src="./assets/ora-mobile.png"
-					alt="Run Ora App Screenshots"
+					alt="Runora App Screenshots"
 					loading="eager"
 					width="560"
 					height="480" />
@@ -493,10 +591,26 @@
 
 		<!-- FOOTER -->
 		<footer>
-			<p class="footer-copy">©2026 Pixora Technologies. All rights reserved.</p>
+			<p class="footer-copy">
+				©2025 - <span id="currentYear"></span>
+				<a href="http://pixora.com.bd" target="_blank" rel="noopener noreferrer"
+					>Pixora</a
+				>
+				Technologies. All rights reserved.
+			</p>
 			<div class="footer-links" aria-label="Footer navigation">
-				<a href="#">Privacy Policy</a>
+				<a
+					href="http://runora.app/privacypolicy"
+					target="_blank"
+					rel="noopener noreferrer"
+					>Privacy Policy</a
+				>
 			</div>
 		</footer>
+
+		<script>
+			document.getElementById("currentYear").textContent =
+				new Date().getFullYear();
+		</script>
 	</body>
 </html>
