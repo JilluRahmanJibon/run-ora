@@ -1,325 +1,502 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Run Ora — Run. Track. Achieve.</title>
-<meta name="description" content="Run Ora is a virtual marathon app that lets runners join marathon. Track your distance, pace, and progress in real time.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Condensed:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Run Ora — Run. Track. Achieve.</title>
+		<meta
+			name="description"
+			content="Run Ora is a virtual marathon app that lets runners join marathon. Track your distance, pace, and progress in real time." />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter+Condensed:wght@700;800;900&family=Inter:wght@400;500;600&display=swap"
+			rel="stylesheet" />
+		<style>
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
 
-  :root {
-    --orange: #FF9E3D;
-    --black: #0a0a0a;
-    --white: #ffffff;
-    --border: rgba(255,255,255,0.08);
-  }
+			:root {
+				--orange: #ff9e3d;
+				--black: #0a0a0a;
+				--white: #ffffff;
+				--border: rgba(255, 255, 255, 0.08);
+			}
 
-  html, body {
-    height: 100%;
-    overflow: hidden;
-  }
+			html,
+			body {
+				height: 100%;
+				overflow: hidden;
+			}
 
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Inter', sans-serif;
-    display: flex;
-    flex-direction: column;
-  }
+			body {
+				background: var(--black);
+				color: var(--white);
+				font-family: "Inter", sans-serif;
+				display: flex;
+				flex-direction: column;
+			}
 
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.4;
-  }
+			body::before {
+				content: "";
+				position: fixed;
+				inset: 0;
+				background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+				pointer-events: none;
+				z-index: 0;
+				opacity: 0.4;
+			}
 
-  nav {
-    position: relative;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 48px;
-    height: 70px;
-    flex-shrink: 0;
-    background: rgba(10,10,10,0.95);
-    border-bottom: 1px solid var(--border);
-  }
+			nav {
+				position: relative;
+				z-index: 100;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 0 48px;
+				height: 70px;
+				flex-shrink: 0;
+				background: rgba(10, 10, 10, 0.95);
+				border-bottom: 1px solid var(--border);
+			}
 
-  .logo { display: flex; align-items: center; text-decoration: none; }
-  .logo img {
-    height: 36px;
-    width: auto;
-    display: block;
-  }
-  .nav-links { display: flex; gap: 40px; list-style: none; }
-  .nav-links a {
-    color: rgba(255,255,255,0.6); text-decoration: none;
-    font-size: 14px; font-weight: 500; transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--white); }
+			.logo {
+				display: flex;
+				align-items: center;
+				text-decoration: none;
+			}
+			.logo img {
+				height: 36px;
+				width: auto;
+				display: block;
+			}
+			.nav-links {
+				display: flex;
+				gap: 40px;
+				list-style: none;
+			}
+			.nav-links a {
+				color: rgba(255, 255, 255, 0.6);
+				text-decoration: none;
+				font-size: 14px;
+				font-weight: 500;
+				transition: color 0.2s;
+			}
+			.nav-links a:hover {
+				color: var(--white);
+			}
 
-  .nav-cta {
-    display: flex; align-items: center; gap: 8px;
-    background: var(--white); color: var(--black);
-    text-decoration: none; padding: 9px 18px;
-    border-radius: 50px; font-weight: 700; font-size: 13px;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .nav-cta:hover { background: #f0f0f0; transform: translateY(-1px); }
-  .nav-cta .arrow-box {
-    width: 24px; height: 24px; background: var(--orange);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .nav-cta .arrow-box svg {
-    width: 12px; height: 12px; stroke: white; fill: none;
-    stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
-  }
+			.nav-cta {
+				display: flex;
+				align-items: center;
+				gap: 8px;
+				background: var(--white);
+				color: var(--black);
+				text-decoration: none;
+				padding: 9px 18px;
+				border-radius: 50px;
+				font-weight: 700;
+				font-size: 13px;
+				transition:
+					background 0.2s,
+					transform 0.2s;
+			}
+			.nav-cta:hover {
+				background: #f0f0f0;
+				transform: translateY(-1px);
+			}
+			.nav-cta .arrow-box {
+				width: 24px;
+				height: 24px;
+				background: var(--orange);
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-shrink: 0;
+			}
+			.nav-cta .arrow-box svg {
+				width: 12px;
+				height: 12px;
+				stroke: white;
+				fill: none;
+				stroke-width: 2.5;
+				stroke-linecap: round;
+				stroke-linejoin: round;
+			}
 
-  .hero {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 0 48px;
-    position: relative;
-    overflow: hidden;
-    min-height: 0;
-  }
+			.hero {
+				flex: 1;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				align-items: center;
+				padding: 0 48px;
+				position: relative;
+				overflow: hidden;
+				min-height: 0;
+			}
 
-  .hero::after {
-    content: '';
-    position: absolute;
-    right: 5%; top: 50%;
-    transform: translateY(-50%);
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(255,158,61,0.10) 0%, transparent 70%);
-    pointer-events: none; z-index: 0;
-  }
+			.hero::after {
+				content: "";
+				position: absolute;
+				right: 5%;
+				top: 50%;
+				transform: translateY(-50%);
+				width: 500px;
+				height: 500px;
+				background: radial-gradient(
+					circle,
+					rgba(255, 158, 61, 0.1) 0%,
+					transparent 70%
+				);
+				pointer-events: none;
+				z-index: 0;
+			}
 
-  .hero-left {
-    position: relative; z-index: 1;
-    padding-right: 32px;
-    animation: fadeUp 0.8s ease both;
-  }
+			.hero-left {
+				position: relative;
+				z-index: 1;
+				padding-right: 32px;
+				animation: fadeUp 0.8s ease both;
+			}
 
-  .hero-tag {
-    font-size: 10px; font-weight: 700;
-    letter-spacing: 4px; color: var(--orange);
-    text-transform: uppercase; margin-bottom: 22px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .hero-tag::before {
-    content: ''; display: inline-block;
-    width: 18px; height: 2px; background: var(--orange); flex-shrink: 0;
-  }
+			.hero-tag {
+				font-size: 10px;
+				font-weight: 700;
+				letter-spacing: 4px;
+				color: var(--orange);
+				text-transform: uppercase;
+				margin-bottom: 22px;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+		 
 
-  .hero-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: clamp(44px, 5.5vw, 61px);
-    line-height: 0.95; letter-spacing: -1px;
-    margin-bottom: 20px; text-transform: uppercase;
-  }
-  .hero-title .line2 { color: var(--orange); }
+			.hero-title {
+				font-family: "Inter", sans-serif;
+				font-weight: 600;
+				font-size: clamp(44px, 5.5vw, 61px);
+				line-height: 0.95;
+				letter-spacing: -1px;
+				margin-bottom: 20px;
+				text-transform: uppercase;
+			}
+			.hero-title .line2 {
+				color: var(--orange);
+			}
 
-  .hero-desc {
-    font-size: 15px; line-height: 1.65;
-    color: rgba(255,255,255,0.5);
-    max-width: 440px; margin-bottom: 32px; font-weight: 400;
-  }
+			.hero-desc {
+				font-size: 15px;
+				line-height: 1.65;
+				color: rgba(255, 255, 255, 0.5);
+				max-width: 440px;
+				margin-bottom: 32px;
+				font-weight: 400;
+			}
 
-  .store-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+			.store-btns {
+				display: flex;
+				gap: 14px;
+				flex-wrap: wrap;
+			}
 
-  .store-btn {
-    display: flex; align-items: center; gap: 10px;
-    background: transparent;
-    border: 1.5px solid rgba(255,255,255,0.18);
-    border-radius: 50px; padding: 10px 20px;
-    text-decoration: none; color: var(--white);
-    font-family: 'Inter', sans-serif;
-    transition: border-color 0.2s, background 0.2s, transform 0.2s;
-  }
-  .store-btn:hover {
-    border-color: var(--orange);
-    background: rgba(255,158,61,0.06);
-    transform: translateY(-2px);
-  }
-  .store-btn .store-icon { width: 30px; height: 30px; flex-shrink: 0; }
-  .store-btn .store-label {
-    font-size: 9px; color: rgba(255,255,255,0.45);
-    display: block; letter-spacing: 0.4px; font-weight: 400;
-  }
-  .store-btn .store-name { font-size: 14px; font-weight: 700; display: block; }
+			.store-btn {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				background: transparent;
+				border: 1.5px solid rgba(255, 255, 255, 0.18);
+				border-radius: 50px;
+				padding: 10px 20px;
+				text-decoration: none;
+				color: var(--white);
+				font-family: "Inter", sans-serif;
+				transition:
+					border-color 0.2s,
+					background 0.2s,
+					transform 0.2s;
+			}
+			.store-btn:hover {
+				border-color: var(--orange);
+				background: rgba(255, 158, 61, 0.06);
+				transform: translateY(-2px);
+			}
+			.store-btn .store-icon {
+				width: 30px;
+				height: 30px;
+				flex-shrink: 0;
+			}
+			.store-btn .store-label {
+				font-size: 9px;
+				color: rgba(255, 255, 255, 0.45);
+				display: block;
+				letter-spacing: 0.4px;
+				font-weight: 400;
+			}
+			.store-btn .store-name {
+				font-size: 14px;
+				font-weight: 700;
+				display: block;
+			}
 
-  .hero-right {
-    position: relative; z-index: 1;
-    height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    animation: fadeUp 0.8s 0.2s ease both;
-    min-height: 0;
-  }
+			.hero-right {
+				position: relative;
+				z-index: 1;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				animation: fadeUp 0.8s 0.2s ease both;
+				min-height: 0;
+			}
 
-  .mockup-img {
-    width: 100%;
-    max-width: 560px;
-    height: 100%;
-    object-fit: contain;
-    object-position: center center;
-    animation: floatImg 5s ease-in-out infinite;
-    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
-  }
+			.mockup-img {
+				width: 100%;
+				max-width: 560px;
+				height: 100%;
+				object-fit: contain;
+				object-position: center center;
+				animation: floatImg 5s ease-in-out infinite;
+				filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
+			}
 
-  @keyframes floatImg {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
-  }
+			@keyframes floatImg {
+				0%,
+				100% {
+					transform: translateY(0px);
+				}
+				50% {
+					transform: translateY(-12px);
+				}
+			}
 
-  .divider {
-    flex-shrink: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-    margin: 0 48px;
-    position: relative; z-index: 1;
-  }
+			.divider {
+				flex-shrink: 0;
+				height: 1px;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					rgba(255, 255, 255, 0.08),
+					transparent
+				);
+				margin: 0 48px;
+				position: relative;
+				z-index: 1;
+			}
 
-  footer {
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 48px;
-    position: relative; z-index: 1;
-  }
-  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.4); }
-  .footer-links { display: flex; gap: 28px; }
-  .footer-links a {
-    font-size: 12px; color: rgba(255,255,255,0.65);
-    text-decoration: none; font-weight: 500; transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--white); }
+			footer {
+				flex-shrink: 0;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 18px 48px;
+				position: relative;
+				z-index: 1;
+			}
+			.footer-copy {
+				font-size: 12px;
+				color: rgba(255, 255, 255, 0.4);
+			}
+			.footer-links {
+				display: flex;
+				gap: 28px;
+			}
+			.footer-links a {
+				font-size: 12px;
+				color: rgba(255, 255, 255, 0.65);
+				text-decoration: none;
+				font-weight: 500;
+				transition: color 0.2s;
+			}
+			.footer-links a:hover {
+				color: var(--white);
+			}
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+			@keyframes fadeUp {
+				from {
+					opacity: 0;
+					transform: translateY(24px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
 
-  @media (max-width: 768px) {
-    html, body { overflow: auto; height: auto; }
-    nav { padding: 0 20px; }
-    .nav-links { display: none; }
-    .hero {
-      grid-template-columns: 1fr;
-      padding: 32px 20px 0;
-      text-align: center;
-      height: auto; flex: none;
-    }
-    .hero-left { padding-right: 0; }
-    .hero-tag { justify-content: center; }
-    .hero-desc { margin: 0 auto 28px; font-size: 14px; }
-    .store-btns { justify-content: center; }
-    .hero-right { height: 320px; }
-    .mockup-img { max-width: 320px; }
-    footer { flex-direction: column; gap: 12px; padding: 18px 20px; text-align: center; }
-    .divider { margin: 0 20px; }
-  }
-</style>
-</head>
-<body>
+			@media (max-width: 768px) {
+				html,
+				body {
+					overflow: auto;
+					height: auto;
+				}
+				nav {
+					padding: 0 20px;
+				}
+				.nav-links {
+					display: none;
+				}
+				.hero {
+					grid-template-columns: 1fr;
+					padding: 32px 20px 0;
+					text-align: center;
+					height: auto;
+					flex: none;
+				}
+				.hero-left {
+					padding-right: 0;
+				}
+				.hero-tag {
+					justify-content: center;
+				}
+				.hero-desc {
+					margin: 0 auto 28px;
+					font-size: 14px;
+				}
+				.store-btns {
+					justify-content: center;
+				}
+				.hero-right {
+					height: 320px;
+				}
+				.mockup-img {
+					max-width: 320px;
+				}
+				footer {
+					flex-direction: column;
+					gap: 12px;
+					padding: 18px 20px;
+					text-align: center;
+				}
+				.divider {
+					margin: 0 20px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<!-- NAV -->
+		<nav>
+			<a href="#" class="logo" aria-label="Run Ora Home">
+				<img
+					src="./assets/logo.svg"
+					alt="Run Ora Logo"
+					width="91"
+					height="53" />
+			</a>
 
-<!-- NAV -->
-<nav>
-   <a href="#" class="logo" aria-label="Run Ora Home">
-    <img src="./assets/logo.svg" alt="Run Ora Logo" width="91" height="53">
-  </a>
+			<ul class="nav-links">
+				<li><a href="#">Home</a></li>
+				<li><a href="#">Challenges</a></li>
+				<li><a href="#">Get Run Ora</a></li>
+			</ul>
 
-  <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Challenges</a></li>
-    <li><a href="#">Get Run Ora</a></li>
-  </ul>
+			<a href="#" class="nav-cta">
+				View Challenges
+				<div class="arrow-box">
+					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path
+							d="M7 17L17 7M17 7H7M17 7v10"
+							stroke="white"
+							stroke-width="2.5"
+							stroke-linecap="round"
+							stroke-linejoin="round" />
+					</svg>
+				</div>
+			</a>
+		</nav>
 
-  <a href="#" class="nav-cta">
-    View Challenges
-    <div class="arrow-box">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 17L17 7M17 7H7M17 7v10" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-  </a>
-</nav>
+		<!-- HERO -->
+		<section class="hero">
+			<div class="hero-left">
+				<div class="hero-tag">
+					Run &nbsp;·&nbsp; Track &nbsp;·&nbsp; Achieve
+				</div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <div class="hero-tag">Run &nbsp;·&nbsp; Track &nbsp;·&nbsp; Achieve</div>
+				<h1 class="hero-title">
+					<span class="line2">Start</span> Running<br />
+					With <span class="line2">Runora</span>
+				</h1>
 
-    <h1 class="hero-title">
-      Start Running<br>
-      <span class="line2">with Runora</span>
-    </h1>
+				<p class="hero-desc">
+					Runora is a virtual marathon app that lets runners join marathon.
+					Track your distance, pace, and progress in real time while competing
+					with a vibrant online community.
+				</p>
 
-    <p class="hero-desc">
-      Run Ora is a virtual marathon app that lets runners join marathon. Track your distance, pace, and progress in real time while competing with a vibrant online community.
-    </p>
+				<div class="store-btns">
+					<a href="#" class="store-btn" aria-label="Download on Apple Store">
+						<!-- Apple Icon -->
+						<svg
+							class="store-icon"
+							viewBox="0 0 32 32"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<circle cx="16" cy="16" r="16" fill="white" fill-opacity="0.08" />
+							<path
+								d="M20.5 17.2c0-2.5 2-3.7 2.1-3.8-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-3 .9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6.1-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.5.8 1.2 1.7 2.5 2.9 2.4 1.2-.1 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.2 2.8-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2-.8-2-3.7zm-1.9-6.8c.6-.8 1.1-1.9 1-3-.9.1-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.1-.5 2.7-1.3z"
+								fill="white" />
+						</svg>
+						<div class="store-text">
+							<span class="store-label">Listed on</span>
+							<span class="store-name">Apple Store</span>
+						</div>
+					</a>
 
-    <div class="store-btns">
-      <a href="#" class="store-btn" aria-label="Download on Apple Store">
-        <!-- Apple Icon -->
-        <svg class="store-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="16" cy="16" r="16" fill="white" fill-opacity="0.08"/>
-          <path d="M20.5 17.2c0-2.5 2-3.7 2.1-3.8-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-3 .9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6.1-3.1.9-3.9 2.4-1.7 2.9-.4 7.2 1.2 9.5.8 1.2 1.7 2.5 2.9 2.4 1.2-.1 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.2 2.8-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2-.8-2-3.7zm-1.9-6.8c.6-.8 1.1-1.9 1-3-.9.1-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1.1.1 2.1-.5 2.7-1.3z" fill="white"/>
-        </svg>
-        <div class="store-text">
-          <span class="store-label">Listed on</span>
-          <span class="store-name">Apple Store</span>
-        </div>
-      </a>
+					<a href="#" class="store-btn" aria-label="Download on Google Play">
+						<!-- Play Icon -->
+						<svg
+							class="store-icon"
+							viewBox="0 0 32 32"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<circle cx="16" cy="16" r="16" fill="white" fill-opacity="0.08" />
+							<path
+								d="M8.5 8.3c-.3.3-.5.8-.5 1.4v12.7c0 .6.2 1.1.5 1.4l.1.1 7.1-7.1v-.2L8.5 8.3z"
+								fill="#4FC3F7" />
+							<path
+								d="M18.1 18.8l-2.4-2.4v-.2l2.4-2.4.1.1 2.9 1.6c.8.5.8 1.2 0 1.7l-2.9 1.6-.1-.1-.1.1z"
+								fill="#FFCA28" />
+							<path
+								d="M18.2 18.7L15.7 16 8.5 23.1c.3.3.7.3 1.2.1l8.5-4.5"
+								fill="#F44336" />
+							<path
+								d="M18.2 13.3L9.7 8.8C9.2 8.6 8.8 8.6 8.5 8.9l7.2 7.1 2.5-2.7z"
+								fill="#4CAF50" />
+						</svg>
+						<div class="store-text">
+							<span class="store-label">Listed on</span>
+							<span class="store-name">Google Play</span>
+						</div>
+					</a>
+				</div>
+			</div>
 
-      <a href="#" class="store-btn" aria-label="Download on Google Play">
-        <!-- Play Icon -->
-        <svg class="store-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="16" cy="16" r="16" fill="white" fill-opacity="0.08"/>
-          <path d="M8.5 8.3c-.3.3-.5.8-.5 1.4v12.7c0 .6.2 1.1.5 1.4l.1.1 7.1-7.1v-.2L8.5 8.3z" fill="#4FC3F7"/>
-          <path d="M18.1 18.8l-2.4-2.4v-.2l2.4-2.4.1.1 2.9 1.6c.8.5.8 1.2 0 1.7l-2.9 1.6-.1-.1-.1.1z" fill="#FFCA28"/>
-          <path d="M18.2 18.7L15.7 16 8.5 23.1c.3.3.7.3 1.2.1l8.5-4.5" fill="#F44336"/>
-          <path d="M18.2 13.3L9.7 8.8C9.2 8.6 8.8 8.6 8.5 8.9l7.2 7.1 2.5-2.7z" fill="#4CAF50"/>
-        </svg>
-        <div class="store-text">
-          <span class="store-label">Listed on</span>
-          <span class="store-name">Google Play</span>
-        </div>
-      </a>
-    </div>
-  </div>
+			<div class="hero-right">
+				<img
+					class="mockup-img"
+					src="./assets/ora-mobile.png"
+					alt="Run Ora App Screenshots"
+					loading="eager"
+					width="560"
+					height="480" />
+			</div>
+		</section>
 
-  <div class="hero-right">
-    <img
-      class="mockup-img"
-      src="./assets/ora-mobile.png"
-      alt="Run Ora App Screenshots"
-      loading="eager"
-      width="560"
-      height="480"
-    >
-  </div>
-</section>
+		<!-- DIVIDER -->
+		<div class="divider" role="separator"></div>
 
-<!-- DIVIDER -->
-<div class="divider" role="separator"></div>
-
-<!-- FOOTER -->
-<footer>
-  <p class="footer-copy">©2025 Pixora Technologies. All rights reserved.</p>
-  <div class="footer-links" aria-label="Footer navigation">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms of Service</a>
-  </div>
-</footer>
-
-</body>
+		<!-- FOOTER -->
+		<footer>
+			<p class="footer-copy">©2026 Pixora Technologies. All rights reserved.</p>
+			<div class="footer-links" aria-label="Footer navigation">
+				<a href="#">Privacy Policy</a>
+			</div>
+		</footer>
+	</body>
 </html>
